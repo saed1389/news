@@ -1,36 +1,50 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
+<!DOCTYPE html>
+<html lang="en">
 
-        <div class="mb-4 text-sm text-gray-600">
-            {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <link rel="icon" href="{{ asset('backend/assets/img/favicon.ico') }}" type="image/x-icon"> <!-- Favicon-->
+    <title>:: Password reset :: </title>
+    <link rel="stylesheet" href="{{ asset('backend/assets/css/luno-style.css') }}">
+    <script src="{{ asset('backend/assets/js/plugins.js') }}"></script>
+</head>
+<body id="layout-1" data-luno="theme-blue">
+<div class="wrapper">
+    <div class="body d-flex p-0 p-xl-5">
+        <div class="container-fluid">
+            <div class="row g-0 justify-content-center">
+                <div class="col-lg-6 d-flex justify-content-center align-items-center">
+                    <div class="card shadow-sm w-100 p-4 p-md-5" style="max-width: 32rem;">
+                        <form class="row g-3" method="post" action="{{ route('password.email') }}">
+                            @csrf
+                            <div class="col-12 text-center mb-1">
+                                <img src="{{ asset('backend/assets/img/auth-password-reset.svg') }}" class="w240 mb-4" alt="" />
+                                <h1>Forgot password?</h1>
+                            </div>
+                            <div class="col-12">
+                                <div class="mb-2">
+                                    <label for="email" class="form-label">Email address</label>
+                                    <input type="email" name="email" id="email" class="form-control form-control-lg" placeholder="name@example.com" required autofocus>
+                                </div>
+                            </div>
+                            <div class="col-12 text-center mt-4">
+                                <button type="submit" class="btn btn-lg btn-block btn-dark lift text-uppercase">SUBMIT</button>
+                                <a href=""></a>
+                            </div>
+                            <div class="col-12 text-center mt-4">
+                                <span class="text-muted"><a href="{{ route('login') }}">Back to Sign in</a></span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
+</div>
+<script src="{{ asset('backend/assets/js/theme.js') }}"></script>
+</body>
 
-        <!-- Session Status -->
-        <x-auth-session-status class="mb-4" :status="session('status')" />
-
-        <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
-
-        <form method="POST" action="{{ route('password.email') }}">
-            @csrf
-
-            <!-- Email Address -->
-            <div>
-                <x-label for="email" :value="__('Email')" />
-
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <x-button>
-                    {{ __('Email Password Reset Link') }}
-                </x-button>
-            </div>
-        </form>
-    </x-auth-card>
-</x-guest-layout>
+</html>
